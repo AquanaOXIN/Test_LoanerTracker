@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Add Device{% endblock %}
+{% block content %}
+<form method="POST">
+    <h3 align="center">Add New Device</h3>
+    <div class="from-group">
+        <label for="assetTag">Asset Tag</label>
+        <input
+            type="number"
+            class="form-control"
+            id="assetTag"
+            name="assetTag"
+            placeholder="Enter asset tag #"
+        />
+    </div>
+        <div class="from-group">
+        <label for="deviceType">Device Type</label>
+        <input
+            type="text"
+            id="deviceTypes"
+            name="deviceType"
+            list="deviceTypes"
+            placeholder="Select a device type"
+        />
+        <datalist id="deviceTypes">
+            <option value="laptop STAFF">laptop STAFF</option>
+            <option value="laptop Student">laptop Student</option>
+            <option value="Desktop">Desktop</option>
+            <option value="Printer">Printer</option>
+            <option value="Other">Other</option>
+        </datalist>
+    </div>
+</form>
+{% endblock %}

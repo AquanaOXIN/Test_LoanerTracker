@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block customNav %}
+{% if boolean == True %} <!-- if test mode is on -->
+<a class="nav-item nav-link" id="test" href="/test">Test</a>
+{% endif %}
+{% endblock %}
+{% block content %}
+<h1 align="center">Campus Technology Loaner Tracker</h1>
+<h3 align="center">DevOps Test Version</h3>
+{% endblock %}
+
