@@ -1,5 +1,5 @@
 ### Loaner Inventory Project
-(baks on both DevOps & Github for now) 
+(baked on OCui DevOps) 
 
 ### Build with Python & Flask
 
