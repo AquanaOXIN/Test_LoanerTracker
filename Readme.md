@@ -1,9 +1,8 @@
 ### Loaner Inventory Project
 (baked on OCui DevOps) 
+**Test_mode toggle is under views.py**
 
 ### Build with Python & Flask
-
-**Test_mode toggle is under views.py**
 
 ### Dev Log
 
