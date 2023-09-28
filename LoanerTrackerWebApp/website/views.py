@@ -26,7 +26,7 @@ def add_device():
         if device_type_validation(device_type) == False:
             flash('Unsupported Device Type', category='error')
         if device_status_validation(device_status) == False:
-            flash('Please DO NOT add unavailable devices to the database!', category='error')
+            flash('How dare you add UNAVAILABLE devices to database!?', category='error')
         
     return render_template("add-device.html")
 
