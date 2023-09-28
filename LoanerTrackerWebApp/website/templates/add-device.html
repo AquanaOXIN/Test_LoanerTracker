@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  
 {% block title %}Add Device{% endblock %}
 {% block content %}
 <form method="POST">
-    <h3 align="center">Add New Device</h3>
+    <h3 align="center">Add New Device</h3> 
     <div class="from-group">
         <label for="assetTag">Asset Tag</label>
         <input
@@ -13,22 +13,36 @@
             placeholder="Enter asset tag #"
         />
     </div>
-        <div class="from-group">
+    <div class="from-group">
         <label for="deviceType">Device Type</label>
-        <input
-            type="text"
-            id="deviceTypes"
+        <select 
+            class ="form-control"
+            id="deviceType"
             name="deviceType"
-            list="deviceTypes"
-            placeholder="Select a device type"
-        />
-        <datalist id="deviceTypes">
+            placeholder="Select the device type"
+        >
             <option value="laptop STAFF">laptop STAFF</option>
-            <option value="laptop Student">laptop Student</option>
+            <option value="laptop STUDENT">laptop STUDENT</option>
             <option value="Desktop">Desktop</option>
             <option value="Printer">Printer</option>
             <option value="Other">Other</option>
-        </datalist>
+        </select>
     </div>
+    <div class="from-group">
+        <label for="deviceStatus">Device Status</label>
+        <select 
+            class ="form-control"
+            id="deviceStatus"
+            name="deviceStatus"
+            placeholder="Select the device status"
+        >
+            <option value="Available">Available</option>
+            <option value="In-Use">In-Use</option>
+            <option value="Retired">Retired</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}

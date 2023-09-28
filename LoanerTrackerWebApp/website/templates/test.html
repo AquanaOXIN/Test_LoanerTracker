@@ -15,21 +15,32 @@
     </div>
     <div class="from-group">
         <label for="deviceType">Device Type</label>
-        <input
-            list="deviceTypes" 
-            type="text"
-            class="form-control"
+        <select 
+            class ="form-control"
             id="deviceType"
             name="deviceType"
-            placeholder="Select a device type"
-        />
-        <datalist id="deviceTypes"> <!-- matches the "list" attr in the input -->
+            placeholder="Select the device type"
+        >
             <option value="laptop STAFF">laptop STAFF</option>
             <option value="laptop Student">laptop Student</option>
             <option value="Desktop">Desktop</option>
             <option value="Printer">Printer</option>
             <option value="Other">Other</option>
-        </datalist>
+        </select>
+    </div>
+    <div class="from-group">
+        <label for="deviceStatus">Device Status</label>
+        <select 
+            class ="form-control"
+            id="deviceStatus"
+            name="deviceStatus"
+            placeholder="Select the device status"
+        >
+            <option value="Available">Available</option>
+            <option value="In-Use">In-Use</option>
+            <option value="Retired">Retired</option>
+            <option value="Unknown">Unknown</option>
+        </select>
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>

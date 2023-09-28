@@ -33,6 +33,10 @@
           <a class="nav-item nav-link" id="home" href="/">Home</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          {% if boolean == True %} <!-- if test mode is on -->
+          <a class="nav-item nav-link" id="addDevice" href="/add-device">New Device</a>
+          <a class="nav-item nav-link" id="test" href="/test">Test</a>
+          {% endif %}
           {% block customNav %}
           {% endblock %}
         </div>

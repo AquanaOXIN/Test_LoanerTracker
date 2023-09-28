@@ -6,6 +6,9 @@
 
 ### Dev Log
 
+### 9/28/2023 - Day 3
+- Implementing some input validation and testing some forms
+
 ### 9/25/2023 - Day 3
 - Figuring out how to pass debug value 
 
