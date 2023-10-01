@@ -30,11 +30,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
+          {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          {% if boolean == True %} <!-- if test mode is on -->
           <a class="nav-item nav-link" id="addDevice" href="/add-device">New Device</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          {% endif %}
+          {% if boolean == True %} <!-- if test mode is on -->
           <a class="nav-item nav-link" id="test" href="/test">Test</a>
           {% endif %}
           {% block customNav %}

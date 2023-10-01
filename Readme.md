@@ -7,6 +7,9 @@
 
 ### Dev Log
 
+### 9/30/2023 - Day 9
+- Implemented logging in with a **secret code** and hashed the code
+
 ### 9/28/2023 - Day 7
 - Implementing some input validation and testing some forms
 

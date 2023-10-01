@@ -1,18 +1,22 @@
 # Stores standard routes for the website (excl. login)
 
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, jsonify
+from flask_login import login_required, current_user
 from .models import Device
 from . import db
 import re
+import json
 
 views = Blueprint('views', __name__) # a blueprint for the flask web app
 
 @views.route('/') 
+@login_required
 def home():
     test_mode = True
-    return render_template("home.html", boolean=test_mode)
+    return render_template("home.html", boolean=test_mode, user=current_user)
 
 @views.route('/add-device', methods=['GET','POST'])
+@login_required
 def add_device():
     if request.method == 'POST':
         asset_tag = request.form.get('assetTag')
@@ -28,14 +32,15 @@ def add_device():
         if device_status_validation(device_status) == False:
             flash('How dare you add UNAVAILABLE devices to database!?', category='error')
         
-    return render_template("add-device.html")
+    return render_template("add-device.html", user=current_user)
 
 @views.route('/test', methods=['GET', 'POST'])
+@login_required
 def test():
     if request.method == 'POST':
         data = request.form.get('assetTag') # Pull information based on the "name" attribute
         print(data)
-    return render_template("test.html")
+    return render_template("test.html", user=current_user)
 
 
 def asset_tag_validation(input_assetTag):
