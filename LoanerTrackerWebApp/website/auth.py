@@ -11,7 +11,7 @@ secret_hash = 'scrypt:32768:8:1$7VEj7HvoMjetWwEH$21537867c0f5c2670a6ea7738dfc17f
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Initialize a CampusTech object in Tech database for testing purposes and temporary usage
+        ### Initialize a CampusTech object in Tech database for testing purposes and temporary usage
         if Tech.query.filter_by(id=0).first() == None:
             new_user = Tech(id=0, username="CampusTech", password=secret_hash)
             db.session.add(new_user)

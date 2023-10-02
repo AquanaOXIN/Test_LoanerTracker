@@ -1,7 +1,8 @@
 # Stores standard routes for the website (excl. login)
 
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
+from datetime import datetime, date, time, timezone
 from .models import Device
 from . import db
 import re
@@ -14,6 +15,35 @@ views = Blueprint('views', __name__) # a blueprint for the flask web app
 def home():
     test_mode = True
     return render_template("home.html", boolean=test_mode, user=current_user)
+
+@views.route('/loan-out', methods=['GET', 'POST'])
+@login_required
+def loan_out():
+    if request.method == 'POST':
+        asset_tag = request.form.get('assetTag')
+        current_ticket = request.form.get('ticketNumber')
+        tech_name = request.form.get('techName')
+        current_time = datetime.now(tz=None)
+        note = request.form.get('note')
+
+        record = Device.query.filter_by(asset_tag=asset_tag).first()
+        if record:
+            record.current_ticket = current_ticket
+            record.tech_name = tech_name
+            record.note = note
+            record.out_date = current_time
+            db.session.commit()
+            flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
+        else:
+            ### TO BE REMOVED
+            new_record = Device(asset_tag=asset_tag, tech_name=tech_name, current_ticket=current_ticket, out_date=current_time)
+            db.session.add(new_record)
+            db.session.commit()
+        
+        return redirect(url_for('views.home'))
+    
+    return render_template("loan-out.html", user=current_user)
+        
 
 @views.route('/add-device', methods=['GET','POST'])
 @login_required
