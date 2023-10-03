@@ -2,6 +2,7 @@
 {% block title %}Add Device{% endblock %}
 {% block content %}
 <form method="POST">
+    <br />
     <h3 align="center">Add New Device</h3> 
     <div class="from-group">
         <label for="assetTag">Asset Tag</label>
@@ -36,10 +37,10 @@
             name="deviceStatus"
             placeholder="Select the device status"
         >
-            <option value="Available">Available</option>
+            <option value="Available" selected="selected">Available</option>
             <option value="In-Use">In-Use</option>
             <option value="Retired">Retired</option>
-            <option value="Unknown" selected="selected">Unknown</option>
+            <option value="Unknown">Unknown</option>
         </select>
     </div>
     <br />

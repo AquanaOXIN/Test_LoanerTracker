@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import Tech
+from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -12,14 +12,16 @@ secret_hash = 'scrypt:32768:8:1$7VEj7HvoMjetWwEH$21537867c0f5c2670a6ea7738dfc17f
 def login():
     if request.method == 'POST':
         ### Initialize a CampusTech object in Tech database for testing purposes and temporary usage
-        if Tech.query.filter_by(id=0).first() == None:
-            new_user = Tech(id=0, username="CampusTech", password=secret_hash)
-            db.session.add(new_user)
-            db.session.commit()
+        # if Tech.query.filter_by(id=0).first() == None:
+        #     new_user = Tech(id=0, username="CampusTech", password=secret_hash)
+        #     db.session.add(new_user)
+        #     db.session.commit()
 
         secret_code = request.form.get('secretCode')
         if check_password_hash(secret_hash, secret_code):
-            user = Tech.query.filter_by(id=0).first()
+
+            ### TO BE CHANGED
+            user = User.query.filter_by(id=0).first()
             flash('Logged in successfully!', category='success')
             login_user(user, remember=True)
             return redirect(url_for('views.home'))

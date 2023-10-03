@@ -2,6 +2,7 @@
 {% block title %}Loan-out{% endblock %}
 {% block content %}
 <form method="POST">
+    <br />
     <h3 align="center">Device Loan-out Sheet</h3> 
     <div class="from-group">
         <label for="assetTag">Asset Tag</label>
@@ -31,6 +32,7 @@
             name="techName"
             placeholder="Select your name"
         >
+            <option value="  ">  </option>
             <option value="AC">AC</option>
             <option value="BB">BB</option>
             <option value="DK">DK</option>
@@ -48,6 +50,7 @@
             class ="form-control"
             id="note"
             name="note"
+            placeholder="Please leave a note here... (optional)"
         ></textarea>
     </div>
     <br />
