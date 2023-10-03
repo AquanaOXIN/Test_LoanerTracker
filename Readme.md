@@ -3,6 +3,8 @@
 
 **Test_mode toggle is under views.py**
 
+added sqlite tools into the environment variables Path
+
 ### Build with Python & Flask
 
 ### Dev Log

@@ -2,7 +2,7 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
-### TO DO --- Separate Device database and Loaner Records Database
+### TO DO --- Separate Device database and Loaner Sign-out sheet Database
 
 class Device(db.Model):
     asset_tag = db.Column(db.Integer, primary_key=True)

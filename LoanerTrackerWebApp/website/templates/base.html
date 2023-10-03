@@ -14,12 +14,16 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
     <!--Nav Bar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom"> -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <button
         class="navbar-toggler"
         type="button"
