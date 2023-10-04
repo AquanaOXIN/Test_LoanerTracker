@@ -3,7 +3,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from datetime import datetime, date, time, timezone
-from .models import Device
+from .models import Device, Record
 from . import db
 import re
 import json
@@ -21,17 +21,15 @@ def home():
 def loan_out():
     if request.method == 'POST':
         asset_tag = request.form.get('assetTag')
-        current_ticket = request.form.get('ticketNumber')
+        ticket_number = request.form.get('ticketNumber')
         tech_name = request.form.get('techName')
         current_time = datetime.now(tz=None)
         note = request.form.get('note')
 
-        record = Device.query.filter_by(asset_tag=asset_tag).first()
-        if record:
-            record.current_ticket = current_ticket
-            record.tech_name = tech_name
-            record.note = note
-            record.out_date = current_time
+        device = Device.query.filter_by(asset_tag=asset_tag).first()
+        if device:
+            new_record = Record(asset_tag=asset_tag, ticket_number=ticket_number, tech_name=tech_name, out_date=current_time, note=note)
+            db.session.add(new_record)
             db.session.commit()
             flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
         else:
@@ -53,7 +51,7 @@ def add_device():
         asset_tag = request.form.get('assetTag')
         device_type = request.form.get('deviceType')
         device_status = request.form.get('deviceStatus')
-
+        note = request.form.get('note')
         # device = Device.query.filter_by(asset_tag=asset_tag).first()
 
         if asset_validation(asset_tag) == False:
@@ -65,7 +63,7 @@ def add_device():
         elif device_status_validation(device_status) == False:
             flash('How dare you add UNAVAILABLE devices to database!?', category='error')
         else:
-            new_device = Device(asset_tag=asset_tag, device_type=device_type, device_status=device_status)
+            new_device = Device(asset_tag=asset_tag, device_type=device_type, device_status=device_status, note=note)
             db.session.add(new_device)
             db.session.commit()
             flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')

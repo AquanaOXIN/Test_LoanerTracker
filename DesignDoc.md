@@ -4,3 +4,7 @@
 # Objectives
 
 - Loaner Check-Outs / Check-Ins
+
+CampusTech
+
+'scrypt:32768:8:1$7VEj7HvoMjetWwEH$21537867c0f5c2670a6ea7738dfc17f23f70e9ecb8951b4180eeee0f7be7c7c1c6b894e877978ec16f90b47a225cb1c7f576defbad9daf9cfeae93337de8e8d6'
