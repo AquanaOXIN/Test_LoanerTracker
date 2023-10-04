@@ -17,6 +17,11 @@ h1 {
     font-weight: 700;
 }
 
+h3 {
+    font-size: 6.5vmin;
+    font-weight: 700;
+}
+
 label {
     font-size: 3vmin;
     font-weight: 500;
@@ -46,32 +51,56 @@ label {
 }
 
 .form-control {
-    border-radius: 10vmin;
-    border: 0.5vmin solid turquoise;
-    background-color:aliceblue;
+    border-radius: 4vmin;
+    border: 0.5vmin solid #3A506B;
+    background-color:#1C2541;
+    color: #6FFFE9;
     font-size: 3vmin;
 }
 
 .form-control:focus {
-    border-color:aliceblue;
-    background-color:darkcyan;
-    color:blanchedalmond;
+    border-color:#6FFFE9;
+    background-color:#1C2541;
+    color: #6FFFE9;
 }
 
 .btn.btn-primary {
     border-radius: 10vmin;
-    padding: 2vmin 4vmin;
+    border: 0.5vmin solid #5BC0BE;
+    padding: 1.5vmin 3vmin;
     /* border: 0.75vmin solid#5BC0BE; */
     background-color: #1C2541;
-    color:#00FFC6;
+    color:#5BC0BE;
     font-size: 4vmin;
 }
 
 .btn.btn-primary:hover {
     /* border: 0.75vmin solid#5BC0BE; */
-    background-color: #00FFC6;
-    color:aliceblue;
+    border-color: #6FFFE9;
+    background-color: #0B132B;
+    color:#6FFFE9;
     font-size: 4vmin;
+}
+
+.btn.btn-primary:active {
+    /* border: 0.75vmin solid#5BC0BE; */
+    border-color: #3A506B !important;
+    background-color: #0B132B !important;
+    color: #3A506B !important;
+    font-size: 4vmin !important;
+}
+
+.table.table-dark {
+    background-color:#1C2541;
+    color:#5BC0BE;
+    font-size: 3vmin;
+}
+
+.table.table-dark.table-hover tbody tr:hover{
+    background-color:#0B132B;
+    color:#6FFFE9;
+    font-size: 3vmin;
+    font-weight: 700;
 }
 
 .alert.alert-danger {

@@ -8,13 +8,27 @@ from . import db
 import re
 import json
 
+### TEST MODE TOGGLE
+test_mode = True
+
 views = Blueprint('views', __name__) # a blueprint for the flask web app
+
+IS_AVAILABLE = "Available"
+IS_INUSE = "In-Use"
+IS_RETIRED = "Retired"
+IS_UNKNOWN = "Unknown"
 
 @views.route('/') 
 @login_required
 def home():
-    test_mode = True
+    
     return render_template("home.html", boolean=test_mode, user=current_user)
+
+@views.route('/records')
+@login_required
+def records():
+    records = Record.query.all()
+    return render_template("records.html", records=records, boolean=test_mode, user=current_user)
 
 @views.route('/loan-out', methods=['GET', 'POST'])
 @login_required
@@ -28,7 +42,9 @@ def loan_out():
 
         device = Device.query.filter_by(asset_tag=asset_tag).first()
         if device:
+            ### CHECK IF DEVICE IS NOT AVAILABLE
             new_record = Record(asset_tag=asset_tag, ticket_number=ticket_number, tech_name=tech_name, out_date=current_time, note=note)
+            device.device_status = IS_INUSE
             db.session.add(new_record)
             db.session.commit()
             flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
@@ -41,7 +57,7 @@ def loan_out():
         
         return redirect(url_for('views.loan_out'))
     
-    return render_template("loan-out.html", user=current_user)
+    return render_template("loan-out.html", boolean=test_mode, user=current_user)
         
 
 @views.route('/add-device', methods=['GET','POST'])
@@ -68,7 +84,7 @@ def add_device():
             db.session.commit()
             flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')
         
-    return render_template("add-device.html", user=current_user)
+    return render_template("add-device.html", boolean=test_mode, user=current_user)
 
 @views.route('/test', methods=['GET', 'POST'])
 @login_required
