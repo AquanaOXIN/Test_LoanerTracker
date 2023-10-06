@@ -14,17 +14,17 @@ body {
 
 h1 {
     font-size: 10vmin;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 h3 {
     font-size: 6.5vmin;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 label {
     font-size: 3vmin;
-    font-weight: 500;
+    font-weight: normal;
 }
 
 .navbar-custom {
@@ -38,7 +38,7 @@ label {
 
 .navbar-nav .nav-item.nav-link {
     color: #5BC0BE;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .navbar-nav .nav-item.nav-link:hover {
@@ -84,10 +84,13 @@ label {
 
 .btn.btn-primary:active {
     /* border: 0.75vmin solid#5BC0BE; */
-    border-color: #3A506B !important;
-    background-color: #0B132B !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1vmin solid #3A506B !important;
+    background-color: #6FFFE9 !important;
     color: #3A506B !important;
-    font-size: 4vmin !important;
+    font-size: 6vmin !important;
+    font-weight: 700;
 }
 
 .table.table-dark {
@@ -96,11 +99,17 @@ label {
     font-size: 3vmin;
 }
 
+.table.table-dark.table-hover thead tr {
+    background-color:#0B132B;
+    color:#5BC0BE;
+    font-size: 3vmin;
+}
+
 .table.table-dark.table-hover tbody tr:hover{
     background-color:#0B132B;
     color:#6FFFE9;
     font-size: 3vmin;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .alert.alert-danger {

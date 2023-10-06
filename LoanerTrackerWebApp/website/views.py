@@ -7,6 +7,7 @@ from .models import Device, Record
 from . import db
 import re
 import json
+import pandas as pd
 
 ### TEST MODE TOGGLE
 test_mode = True
@@ -37,23 +38,28 @@ def loan_out():
         asset_tag = request.form.get('assetTag')
         ticket_number = request.form.get('ticketNumber')
         tech_name = request.form.get('techName')
-        current_time = datetime.now(tz=None)
+        # current_time = datetime.now(tz=None)
+        time_string = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        current_time = pd.to_datetime(time_string).to_pydatetime()
         note = request.form.get('note')
 
         device = Device.query.filter_by(asset_tag=asset_tag).first()
         if device:
             ### CHECK IF DEVICE IS NOT AVAILABLE
-            new_record = Record(asset_tag=asset_tag, ticket_number=ticket_number, tech_name=tech_name, out_date=current_time, note=note)
-            device.device_status = IS_INUSE
-            db.session.add(new_record)
-            db.session.commit()
-            flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
+            if device.device_status != IS_AVAILABLE:
+                flash('Loaner '+ asset_tag +' is NOT AVAILABLE!', category='error')
+            else:
+                new_record = Record(asset_tag=asset_tag, ticket_number=ticket_number, tech_name=tech_name, out_date=current_time, note=note)
+                device.device_status = IS_INUSE
+                db.session.add(new_record)
+                db.session.commit()
+                flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
         else:
             # new_record = Device(asset_tag=asset_tag, tech_name=tech_name, current_ticket=current_ticket, out_date=current_time)
             # db.session.add(new_record)
             # db.session.commit()
             flash('Loaner '+ asset_tag +' is NOT in the loaner database!', category='error')
-            flash('If the device is a loaner, please add it into the database through \'New Device\' first!', category='warning')
+            flash('If the device is a loaner, please add it into the database through \'New Device\' first.', category='warning')
         
         return redirect(url_for('views.loan_out'))
     
