@@ -10,7 +10,7 @@ added sqlite tools into the environment variables Path
 ### Dev Log
 
 ### TO DO
-- Beautify time format
+- ~~Beautify time format~~
 - Return loaner feature 
 - Modify device information feature 
 - Beautify button when it's pressed
