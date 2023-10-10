@@ -1,0 +1,59 @@
+{% extends "base.html" %}  
+{% block title %}Loan-out{% endblock %}
+{% block content %}
+<form method="POST">
+    <br />
+    <h3 align="center">Return a Loaner</h3> 
+    <div class="from-group">
+        <label for="assetTag">Asset Tag</label>
+        <input
+            type="number"
+            class="form-control"
+            id="assetTag"
+            name="assetTag"
+            placeholder="Enter asset tag #"
+        />
+    </div>
+    <div class="from-group">
+        <label for="ticketNumber">Ticket Number</label>
+        <input
+            type="number"
+            class="form-control"
+            id="ticketNumber"
+            name="ticketNumber"
+            placeholder="Enter ticket #"
+        />
+    </div>
+    <div class="from-group">
+        <label for="techName">Your Name</label>
+        <select 
+            class ="form-control"
+            id="techName"
+            name="techName"
+            placeholder="Select your name"
+        >
+            <option value="  ">  </option>
+            <option value="AC">AC</option>
+            <option value="BB">BB</option>
+            <option value="DK">DK</option>
+            <option value="KS">KS</option>
+            <option value="MG">MG</option>
+            <option value="OX">OX</option>
+            <option value="PM">PM</option>
+            <option value="PS">PS</option>
+            <option value="WG">WG</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="note">Notes</label>
+        <textarea
+            class ="form-control"
+            id="note"
+            name="note"
+            placeholder="Please leave a note here... (optional)"
+        ></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

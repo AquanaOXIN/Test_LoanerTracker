@@ -33,7 +33,7 @@ label {
 
 .navbar.navbar-expand-lg.navbar-dark {
     background-color:#1C2541;
-    color: #00FFC6;
+    color: #6FFFE9;
 }
 
 .navbar-nav .nav-item.nav-link {
@@ -42,7 +42,7 @@ label {
 }
 
 .navbar-nav .nav-item.nav-link:hover {
-    color: #00FFC6;
+    color: #6FFFE9;
     font-style: oblique;
 }
 
@@ -62,6 +62,15 @@ label {
     border-color:#6FFFE9;
     background-color:#1C2541;
     color: #6FFFE9;
+}
+
+::-ms-reveal {
+    display: none;
+  }
+
+i.eyeball {
+    color:#6FFFE9;
+    cursor: pointer;
 }
 
 .btn.btn-primary {
@@ -89,8 +98,8 @@ label {
     border: 1vmin solid #3A506B !important;
     background-color: #6FFFE9 !important;
     color: #3A506B !important;
-    font-size: 6vmin !important;
-    font-weight: 700;
+    font-size: 5vmin !important;
+    font-weight: bold;
 }
 
 .table.table-dark {
@@ -115,4 +124,13 @@ label {
 .alert.alert-danger {
     background-color: hotpink;
     color:aliceblue;
+    font-size: 3vmin;
+    font-weight: bold;
+}
+
+.alert.alert-success {
+    background-color:aqua;
+    color:midnightblue;
+    font-size: 3vmin;
+    font-weight: bold;
 }

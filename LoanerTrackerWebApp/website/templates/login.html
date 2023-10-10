@@ -3,7 +3,7 @@
   <br />
   <h1 align="center">Login</h1>
   <div class="form-group">
-    <label for="password">Secret Code</label>
+    <label for="secretCode">Secret Code</label>
     <input
       type="password"
       class="form-control"
@@ -11,6 +11,12 @@
       name="secretCode"
       placeholder="Enter the secret code"
     />
+    <br />
+    <div align="center">
+      <i class="eyeball" id="visibilityBtn">
+        <span class="material-symbols-outlined" id="eyeballIcon">visibility</span>
+      </i>
+    </div>
   </div>
   <br />
   <div align="center">
@@ -18,3 +24,20 @@
   </div>
 </form>
 {% endblock %}
+
+  <script type="text/javascript">
+    const visibilityBtn = document.getElementById("visibilityBtn")
+    const eyeballIcon = document.getElementById("eyeballIcon")
+    visibilityBtn.addEventListener("click", toggleVisibility)
+    function toggleVisibility() {
+      const passwordInput = document.getElementById("secretCode")
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text"
+        eyeballIcon.innerText = "visibility_off"
+        console.log(eyeballIcon.innerText)
+      } else {
+        passwordInput.type = "password"
+        eyeballIcon.innerText = "visibility"
+      }
+    }
+  </script>
