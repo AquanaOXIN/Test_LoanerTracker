@@ -1,35 +1,40 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Records{% endblock %}
 {% block customNav %}
 {% endblock %}
 {% block content %}
 <br />
 <h3 align="center">Device Sign-out Records</h3>
 <br />
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th>Record #</th>
-            <th>Asset Tag #</th>
-            <th>Ticket #</th>
-            <th>Technician</th>
-            <th>Borrowed On</th>
-            <th>Note</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for record in records %}
-        <tr>
-            <td>{{ record.id }}</td>
-            <td>{{ record.asset_tag }}</td>
-            <td>{{ record.ticket_number }}</td>
-            <td>{{ record.tech_name }}</td>
-            <td>{{ record.out_date}}</td>
-            <td>{{ record.note }}</td>
-            <!-- Add more table data as needed -->
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="div-scrollable">
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Record #</th>
+                <th>Asset Tag #</th>
+                <th>Ticket #</th>
+                <th>Technician</th>
+                <th>Borrowed On</th>
+                <th>Returned On</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.asset_tag }}</td>
+                <td>{{ record.ticket_number }}</td>
+                <td>{{ record.tech_name }}</td>
+                <td>{{ record.out_date}}</td>
+                <td>{{ record.in_date}}</td>
+                <td>{{ record.note }}</td>
+                <!-- Add more table data as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 <br />
 {% endblock %}

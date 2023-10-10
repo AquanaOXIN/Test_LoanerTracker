@@ -19,7 +19,8 @@ class Record(db.Model):
     asset_tag = db.Column(db.Integer, db.ForeignKey('device.asset_tag'))
     ticket_number = db.Column(db.String(150))
     tech_name = db.Column(db.String(150), db.ForeignKey('technician.name'))
-    out_date = db.Column(db.DateTime(timezone=True), default=func.now())
+    out_date = db.Column(db.DateTime(timezone=True))
+    in_date = db.Column(db.DateTime(timezone=True))
     note = db.Column(db.String(10000))
 
 # class Ticket_History(db.Model):
