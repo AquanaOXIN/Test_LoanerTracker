@@ -31,6 +31,12 @@ def records():
     records = Record.query.all()
     return render_template("records.html", records=records, boolean=test_mode, user=current_user)
 
+@views.route('/devices')
+@login_required
+def devices():
+    devices = Device.query.all()
+    return render_template("devices.html", devices=devices, boolean=test_mode, user=current_user)
+
 @views.route('/loan-out', methods=['GET', 'POST'])
 @login_required
 def loan_out():
@@ -65,6 +71,50 @@ def loan_out():
     
     return render_template("loan-out.html", boolean=test_mode, user=current_user)
         
+@views.route('/turn-in', methods=['GET', 'POST'])
+@login_required
+def turn_in():
+    if request.method == 'POST':
+        asset_tag = request.form.get('assetTag')
+        ticket_number = request.form.get('ticketNumber')
+        tech_name = request.form.get('techName')
+        # current_time = datetime.now(tz=None)
+        time_string = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        current_time = pd.to_datetime(time_string).to_pydatetime()
+        return_note = request.form.get('note')
+
+        record = Record.query.filter_by(asset_tag=asset_tag, ticket_number=ticket_number).first()
+        # device = Device.query.filter_by(asset_tag=asset_tag).first()
+        if record:
+            device = Device.query.filter_by(asset_tag=asset_tag).first()
+            if device.device_status == IS_INUSE:
+                record.in_date = current_time
+                device.device_status = IS_AVAILABLE
+                # Update the note
+                record.note += " || Return note: " + return_note
+                # If it's not returned by the same tech as it's loaned out, update it into the note
+                if tech_name != record.tech_name:
+                    record.note += " || Returned by: " + tech_name
+                db.session.commit()
+                flash('Loaner '+ asset_tag +' has been successfully returned!', category='success')
+            elif device.device_status == IS_AVAILABLE:
+                flash('Loaner '+ asset_tag +' is not loaned out!', category='error')
+            elif device.device_status == IS_RETIRED:
+                flash('Loaner '+ asset_tag +' is already marked as RETIRED!', category='error')
+            elif device.device_status == IS_UNKNOWN:
+                flash('Loaner '+ asset_tag +' status missing, please see admin!', category='error')
+            else:
+                flash('Something went wrong!', category='error')
+        else:
+            # new_record = Device(asset_tag=asset_tag, tech_name=tech_name, current_ticket=current_ticket, out_date=current_time)
+            # db.session.add(new_record)
+            # db.session.commit()
+            flash('Cannot locate the loan-out record for the device corresponding to the ticket!', category='error')
+        
+        return redirect(url_for('views.turn_in'))
+    
+    return render_template("turn-in.html", boolean=test_mode, user=current_user)
+  
 
 @views.route('/add-device', methods=['GET','POST'])
 @login_required

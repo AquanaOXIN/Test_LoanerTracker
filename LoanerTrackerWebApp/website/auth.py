@@ -15,7 +15,6 @@ def login():
         ### TO BE CHANGED
         secret_code = request.form.get('secretCode')
         if check_password_hash(secret_hash, secret_code):
-
             ### TO BE CHANGED
             user = User.query.filter_by(id=0).first()
             flash('Logged in successfully!', category='success')
