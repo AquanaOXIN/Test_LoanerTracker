@@ -107,6 +107,24 @@ i.eyeball {
     overflow-x: auto;
 }
 
+::-webkit-scrollbar {
+    width: 1vmin;
+    height: 2vmin;
+    
+}
+::-webkit-scrollbar-track-piece  {
+    background-color: #1C2541;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #5BC0BE;
+    -webkit-border-radius: 0.75vmin;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #6FFFE9;
+    -webkit-border-radius: 0.75vmin;
+}
+
 .table.table-dark.table-hover {
     background-color:#1C2541;
     color:#5BC0BE;
