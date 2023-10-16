@@ -3,6 +3,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from . import views
 
 auth = Blueprint('auth', __name__) 
 
@@ -12,18 +13,28 @@ secret_hash = 'scrypt:32768:8:1$7VEj7HvoMjetWwEH$21537867c0f5c2670a6ea7738dfc17f
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        ### TO BE CHANGED
-        secret_code = request.form.get('secretCode')
-        if check_password_hash(secret_hash, secret_code):
-            ### TO BE CHANGED
-            user = User.query.filter_by(id=0).first()
-            flash('Logged in successfully!', category='success')
-            login_user(user, remember=True)
-            return redirect(url_for('views.home'))
+        if "colorModeIcon" in request.form:
+            # views.color_toggle()
+            data = request.form.get('colorModeIcon')
+            print(data)
+            if data == "isDark":
+                views.dark_mode = False
+            else:
+                views.dark_mode = True
         else:
-            flash('Invalid Code, iNtRuDeR!!!', category='error')
+            ### TO BE CHANGED
+            secret_code = request.form.get('secretCode')
+            print(secret_code)
+            if check_password_hash(secret_hash, secret_code):
+                ### TO BE CHANGED
+                user = User.query.filter_by(id=0).first()
+                flash('Logged in successfully!', category='success')
+                login_user(user, remember=True)
+                return redirect(url_for('views.home'))
+            else:
+                flash('Invalid Code, iNtRuDeR!!!', category='error')
     
-    return render_template("login.html", user=current_user)
+    return render_template("login.html", user=current_user, dark_mode=views.dark_mode)
 
 @auth.route('/logout')
 @login_required

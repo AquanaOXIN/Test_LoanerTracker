@@ -12,6 +12,8 @@ import pandas as pd
 ### TEST MODE TOGGLE
 test_mode = True
 
+dark_mode = True
+
 views = Blueprint('views', __name__) # a blueprint for the flask web app
 
 IS_AVAILABLE = "Available"
@@ -22,25 +24,25 @@ IS_UNKNOWN = "Unknown"
 @views.route('/') 
 @login_required
 def home():
-    
-    return render_template("home.html", boolean=test_mode, user=current_user)
+    return render_template("home.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/records')
 @login_required
 def records():
     records = Record.query.all()
-    return render_template("records.html", records=records, boolean=test_mode, user=current_user)
+    return render_template("records.html", records=records, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/devices')
 @login_required
 def devices():
     devices = Device.query.all()
-    return render_template("devices.html", devices=devices, boolean=test_mode, user=current_user)
+    return render_template("devices.html", devices=devices, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/loan-out', methods=['GET', 'POST'])
 @login_required
 def loan_out():
     if request.method == 'POST':
+        
         asset_tag = request.form.get('assetTag')
         ticket_number = request.form.get('ticketNumber')
         tech_name = request.form.get('techName')
@@ -69,7 +71,7 @@ def loan_out():
         
         return redirect(url_for('views.loan_out'))
     
-    return render_template("loan-out.html", boolean=test_mode, user=current_user)
+    return render_template("loan-out.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
         
 @views.route('/turn-in', methods=['GET', 'POST'])
 @login_required
@@ -113,7 +115,7 @@ def turn_in():
         
         return redirect(url_for('views.turn_in'))
     
-    return render_template("turn-in.html", boolean=test_mode, user=current_user)
+    return render_template("turn-in.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
   
 
 @views.route('/add-device', methods=['GET','POST'])
@@ -140,7 +142,7 @@ def add_device():
             db.session.commit()
             flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')
         
-    return render_template("add-device.html", boolean=test_mode, user=current_user)
+    return render_template("add-device.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/test', methods=['GET', 'POST'])
 @login_required
@@ -149,6 +151,14 @@ def test():
         data = request.form.get('assetTag') # Pull information based on the "name" attribute
         print(data)
     return render_template("test.html", user=current_user)
+
+# def color_toggle():
+#     current_color_mode = request.form.get('colorModeIcon')
+#     print(current_color_mode)
+#     if current_color_mode == "isDark":
+#         dark_mode = False
+#     else:
+#         dark_mode = True
 
 def asset_validation(input_assetTag):
     is_valid = True
