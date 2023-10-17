@@ -12,7 +12,6 @@ added sqlite tools into the environment variables Path
 ### TO DO
 - ~~Beautify time format~~
 - ~~Return loaner feature~~ 
-- Modify device information feature 
 - ~~Beautify button when it's pressed~~
 - ~~Flash message coloring~~ 
 - Search for specific device loan out history

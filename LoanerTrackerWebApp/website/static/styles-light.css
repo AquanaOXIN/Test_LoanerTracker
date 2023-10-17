@@ -1,14 +1,14 @@
 /*
-#F2508B
-#385773
-#3BBFBF
-#F2F2F2
-#F5D866
+#EDEDE9 EDEDE9
+#D5BDAF D5BDAF
+#F5EBE0 F5EBE0
+#F5F4EF F5F4EF
+#8B8784 8B8784
 */
 
 body {
-    background-color:#C7F9CC;
-    color:#22577A;
+    background-color:#EDEDE9;
+    color:#8B8784;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -28,40 +28,42 @@ label {
 }
 
 .navbar-custom {
-    background-color:#57CC99;
+    background-color:#D5BDAF;
 }
 
 .navbar.navbar-expand-lg.navbar-dark {
-    background-color:#57CC99;
-    color: #22577A;
+    background-color:#D5BDAF;
+    color: #8B8784;
 }
 
 .navbar-nav .nav-item.nav-link {
-    color: #38A3A5;
+    color: #F5F4EF;
     font-weight: bold;
 }
 
 .navbar-nav .nav-item.nav-link:hover {
-    color: #22577A;
+    color: #8B8784;
     font-style: oblique;
 }
 
 .navbar-nav .nav-item.nav-link:focus {
-    color: #3A506B;
+    color: #F5EBE0;
 }
 
 .form-control {
     border-radius: 4vmin;
-    border: 0.5vmin solid #3A506B;
-    background-color:#57CC99;
-    color: #22577A;
+    border: 0.5vmin solid #F5EBE0;
+    background-color:#D5BDAF;
+    color: #8B8784;
     font-size: 3vmin;
 }
 
 .form-control:focus {
-    border-color:#22577A;
-    background-color:#57CC99;
-    color: #22577A;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color:#8B8784;
+    background-color:#D5BDAF;
+    color: #8B8784;
 }
 
 ::-ms-reveal {
@@ -69,7 +71,7 @@ label {
   }
 
 i.eyeball {
-    color:#22577A;
+    color:#8B8784;
     cursor: pointer;
 }
 
@@ -79,7 +81,7 @@ i button.material-symbols-outlined {
     background: none;
     box-shadow: none;
     border-radius: 0px;
-    color:#22577A;
+    color:#8B8784;
 }
 
 
@@ -90,29 +92,29 @@ div.color-toggle-div{
 
 .btn.btn-primary {
     border-radius: 10vmin;
-    border: 0.5vmin solid #38A3A5;
+    border: 0.5vmin solid #F5F4EF;
     padding: 1.5vmin 3vmin;
-    /* border: 0.75vmin solid#38A3A5; */
-    background-color: #57CC99;
-    color:#38A3A5;
+    /* border: 0.75vmin solid#F5F4EF; */
+    background-color: #D5BDAF;
+    color:#F5F4EF;
     font-size: 4vmin;
 }
 
 .btn.btn-primary:hover {
-    /* border: 0.75vmin solid#38A3A5; */
-    border-color: #22577A;
-    background-color: #C7F9CC;
-    color:#22577A;
+    /* border: 0.75vmin solid#F5F4EF; */
+    border-color: #8B8784;
+    background-color: #EDEDE9;
+    color:#8B8784;
     font-size: 4vmin;
 }
 
 .btn.btn-primary:active {
-    /* border: 0.75vmin solid#38A3A5; */
+    /* border: 0.75vmin solid#F5F4EF; */
     outline: none !important;
     box-shadow: none !important;
-    border: 1vmin solid #3A506B !important;
-    background-color: #22577A !important;
-    color: #3A506B !important;
+    border: 1vmin solid #F5EBE0 !important;
+    background-color: #8B8784 !important;
+    color: #F5EBE0 !important;
     font-size: 5vmin !important;
     font-weight: bold;
 }
@@ -128,44 +130,49 @@ div.color-toggle-div{
     
 }
 ::-webkit-scrollbar-track-piece  {
-    background-color: #57CC99;
+    background-color: #D5BDAF;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #38A3A5;
+    background-color: #8B8784; 
     -webkit-border-radius: 0.75vmin;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background-color: #22577A;
+    background-color: #F5F4EF;
     -webkit-border-radius: 0.75vmin;
 }
 
 .table.table-dark.table-hover {
-    background-color:#57CC99;
-    color:#38A3A5;
+    background-color:#D5BDAF;
+    color:#F5F4EF;
     font-size: 3vmin;
 }
 
 .table.table-dark.table-hover thead tr {
-    background-color:#C7F9CC;
-    color:#38A3A5;
+    background-color:#8B8784;
+    color:#F5F4EF;
 }
 
 .table.table-dark.table-hover tbody tr:hover{
-    background-color:#C7F9CC;
-    color:#22577A;
+    background-color:#EDEDE9;
+    color:#8B8784;
 }
 
 .alert.alert-danger {
-    background-color: hotpink;
-    color:aliceblue;
+    background-color:indianred;
+    color:floralwhite;
     font-size: 3vmin;
     font-weight: bold;
 }
 
 .alert.alert-success {
-    background-color:aqua;
-    color:midnightblue;
+    background-color:cadetblue;
+    color:beige;
     font-size: 3vmin;
     font-weight: bold;
+}
+
+::selection {
+    background-color: #8B8784;
+    color: #F5F4EF;
 }

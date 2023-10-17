@@ -1,9 +1,9 @@
 /*
-#F2508B
-#385773
-#3BBFBF
-#F2F2F2
-#F5D866
+#0B132B
+#1C2541
+#3A506B
+#5BC0BE
+#6FFFE9
 */
 
 body {
@@ -81,7 +81,6 @@ i button.material-symbols-outlined {
     border-radius: 0px;
     color:#6FFFE9;
 }
-
 
 div.color-toggle-div{
     margin-top: 1vmin;
@@ -168,4 +167,9 @@ div.color-toggle-div{
     color:midnightblue;
     font-size: 3vmin;
     font-weight: bold;
+}
+
+::selection {
+    background-color: #6FFFE9;
+    color: #0B132B;
 }

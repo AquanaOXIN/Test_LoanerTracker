@@ -14,13 +14,13 @@ secret_hash = 'scrypt:32768:8:1$7VEj7HvoMjetWwEH$21537867c0f5c2670a6ea7738dfc17f
 def login():
     if request.method == 'POST':
         if "colorModeIcon" in request.form:
-            # views.color_toggle()
-            data = request.form.get('colorModeIcon')
-            print(data)
-            if data == "isDark":
-                views.dark_mode = False
-            else:
-                views.dark_mode = True
+            views.color_toggle()
+            # data = request.form.get('colorModeIcon')
+            # print(data)
+            # if data == "isDark":
+            #     views.dark_mode = False
+            # else:
+            #     views.dark_mode = True
         else:
             ### TO BE CHANGED
             secret_code = request.form.get('secretCode')
