@@ -7,10 +7,9 @@ import re
 import json
 import pandas as pd
 
-### TEST MODE TOGGLE
 test_mode = True
 
-views = Blueprint('views', __name__)  # a blueprint for the flask web app
+views = Blueprint('views', __name__) 
 
 IS_AVAILABLE = "Available"
 IS_INUSE = "In-Use"
@@ -23,7 +22,9 @@ def home():
     if request.method == 'POST':
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)  
     return render_template("home.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/records', methods=['GET', 'POST'])
@@ -33,7 +34,9 @@ def records():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
     records = Record.query.all()
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)
     return render_template("records.html", records=records, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/devices', methods=['GET', 'POST'])
@@ -43,7 +46,9 @@ def devices():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
     devices = Device.query.all()
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)  
     return render_template("devices.html", devices=devices, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/loan-out', methods=['GET', 'POST'])
@@ -76,7 +81,8 @@ def loan_out():
 
             return redirect(url_for('views.loan_out'))
 
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)  
     return render_template("loan-out.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/turn-in', methods=['GET', 'POST'])
@@ -116,8 +122,9 @@ def turn_in():
                 flash('Cannot locate the loan-out record for the device corresponding to the ticket!', category='error')
 
             return redirect(url_for('views.turn_in'))
-
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+        
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)  
     return render_template("turn-in.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/add-device', methods=['GET','POST'])
@@ -146,7 +153,8 @@ def add_device():
                 db.session.commit()
                 flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')
 
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)
     return render_template("add-device.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/test', methods=['GET', 'POST'])
@@ -156,17 +164,21 @@ def test():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
         else:
-            data = request.form.get('assetTag')  # Pull information based on the "name" attribute
+            data = request.form.get('assetTag') 
             print(data)
-    dark_mode = session.get('dark_mode', True)  # modified here ...
+    
+    # modified here ...
+    dark_mode = session.get('dark_mode', True)  
     return render_template("test.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 def color_toggle():
     current_color_mode = request.form.get('colorModeIcon')
     if current_color_mode == "isDark":
-        session['dark_mode'] = False  # modified here ...
+        # modified here ...
+        session['dark_mode'] = False
     else:
-        session['dark_mode'] = True  # modified here ...
+        # modified here ...
+        session['dark_mode'] = True
     return session['dark_mode']
 
 def asset_validation(input_assetTag):

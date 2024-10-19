@@ -2,14 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-from .config import SECRET_KEY  # modified here ...
+# modified here ...
+from .config import SECRET_KEY  
 
 db = SQLAlchemy()
 DB_NAME = "loaner.db"
 
 def create_app():
-    app = Flask(__name__)  # Initialize Flask
-    app.config['SECRET_KEY'] = SECRET_KEY  # modified here ...
+    app = Flask(__name__)
+    # modified here ...
+    app.config['SECRET_KEY'] = SECRET_KEY  
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
