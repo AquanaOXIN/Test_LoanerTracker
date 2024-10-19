@@ -1,6 +1,4 @@
-# Stores standard routes for the website (excl. login)
-
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session  # modified here ...
 from flask_login import login_required, current_user
 from datetime import datetime, date, time, timezone
 from .models import Device, Record
@@ -12,21 +10,20 @@ import pandas as pd
 ### TEST MODE TOGGLE
 test_mode = True
 
-dark_mode = True
-
-views = Blueprint('views', __name__) # a blueprint for the flask web app
+views = Blueprint('views', __name__)  # a blueprint for the flask web app
 
 IS_AVAILABLE = "Available"
 IS_INUSE = "In-Use"
 IS_RETIRED = "Retired"
 IS_UNKNOWN = "Unknown"
 
-@views.route('/', methods=['GET', 'POST']) 
+@views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
     if request.method == 'POST':
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("home.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/records', methods=['GET', 'POST'])
@@ -36,6 +33,7 @@ def records():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
     records = Record.query.all()
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("records.html", records=records, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/devices', methods=['GET', 'POST'])
@@ -45,6 +43,7 @@ def devices():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
     devices = Device.query.all()
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("devices.html", devices=devices, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/loan-out', methods=['GET', 'POST'])
@@ -57,14 +56,12 @@ def loan_out():
             asset_tag = request.form.get('assetTag')
             ticket_number = request.form.get('ticketNumber')
             tech_name = request.form.get('techName')
-            # current_time = datetime.now(tz=None)
             time_string = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             current_time = pd.to_datetime(time_string).to_pydatetime()
             note = request.form.get('note')
 
             device = Device.query.filter_by(asset_tag=asset_tag).first()
             if device:
-                ### CHECK IF DEVICE IS NOT AVAILABLE
                 if device.device_status != IS_AVAILABLE:
                     flash('Loaner '+ asset_tag +' is NOT AVAILABLE!', category='error')
                 else:
@@ -74,16 +71,14 @@ def loan_out():
                     db.session.commit()
                     flash('Loaner '+ asset_tag +' has been successfully loaned out!', category='success')
             else:
-                # new_record = Device(asset_tag=asset_tag, tech_name=tech_name, current_ticket=current_ticket, out_date=current_time)
-                # db.session.add(new_record)
-                # db.session.commit()
                 flash('Loaner '+ asset_tag +' is NOT in the loaner database!', category='error')
                 flash('If the device is a loaner, please add it into the database through \'New Device\' first.', category='warning')
-            
+
             return redirect(url_for('views.loan_out'))
-    
+
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("loan-out.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
-        
+
 @views.route('/turn-in', methods=['GET', 'POST'])
 @login_required
 def turn_in():
@@ -94,21 +89,17 @@ def turn_in():
             asset_tag = request.form.get('assetTag')
             ticket_number = request.form.get('ticketNumber')
             tech_name = request.form.get('techName')
-            # current_time = datetime.now(tz=None)
             time_string = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             current_time = pd.to_datetime(time_string).to_pydatetime()
             return_note = request.form.get('note')
 
             record = Record.query.filter_by(asset_tag=asset_tag, ticket_number=ticket_number).first()
-            # device = Device.query.filter_by(asset_tag=asset_tag).first()
             if record:
                 device = Device.query.filter_by(asset_tag=asset_tag).first()
                 if device.device_status == IS_INUSE:
                     record.in_date = current_time
                     device.device_status = IS_AVAILABLE
-                    # Update the note
                     record.note += " || Return note: " + return_note
-                    # If it's not returned by the same tech as it's loaned out, update it into the note
                     if tech_name != record.tech_name:
                         record.note += " || Returned by: " + tech_name
                     db.session.commit()
@@ -122,15 +113,12 @@ def turn_in():
                 else:
                     flash('Something went wrong!', category='error')
             else:
-                # new_record = Device(asset_tag=asset_tag, tech_name=tech_name, current_ticket=current_ticket, out_date=current_time)
-                # db.session.add(new_record)
-                # db.session.commit()
                 flash('Cannot locate the loan-out record for the device corresponding to the ticket!', category='error')
-            
+
             return redirect(url_for('views.turn_in'))
-    
+
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("turn-in.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
-  
 
 @views.route('/add-device', methods=['GET','POST'])
 @login_required
@@ -143,12 +131,11 @@ def add_device():
             device_type = request.form.get('deviceType')
             device_status = request.form.get('deviceStatus')
             note = request.form.get('note')
-            # device = Device.query.filter_by(asset_tag=asset_tag).first()
 
             if asset_validation(asset_tag) == False:
                 flash('Device Already in Database', category='error')
             elif asset_tag_validation(asset_tag) == False:
-                flash('Invalid Asset Tag #', category='error')        
+                flash('Invalid Asset Tag #', category='error')
             elif device_type_validation(device_type) == False:
                 flash('Unsupported Device Type', category='error')
             elif device_status_validation(device_status) == False:
@@ -158,7 +145,8 @@ def add_device():
                 db.session.add(new_device)
                 db.session.commit()
                 flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')
-        
+
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("add-device.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 @views.route('/test', methods=['GET', 'POST'])
@@ -168,28 +156,18 @@ def test():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
         else:
-            data = request.form.get('assetTag') # Pull information based on the "name" attribute
+            data = request.form.get('assetTag')  # Pull information based on the "name" attribute
             print(data)
+    dark_mode = session.get('dark_mode', True)  # modified here ...
     return render_template("test.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 def color_toggle():
-    global dark_mode
-    # toggle the color base on the visual icon in HTML 
     current_color_mode = request.form.get('colorModeIcon')
-    # print(get_color_mode())
     if current_color_mode == "isDark":
-        dark_mode = False
-        print(dark_mode)
+        session['dark_mode'] = False  # modified here ...
     else:
-        dark_mode = True
-        print(dark_mode)
-    return dark_mode
-
-# def get_color_mode():
-#     return dark_mode
-
-# def set_color_mode():
-#     dark_mode = dark_mode
+        session['dark_mode'] = True  # modified here ...
+    return session['dark_mode']
 
 def asset_validation(input_assetTag):
     is_valid = True

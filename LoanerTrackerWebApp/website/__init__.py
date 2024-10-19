@@ -2,18 +2,18 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from .config import SECRET_KEY  # modified here ...
 
 db = SQLAlchemy()
 DB_NAME = "loaner.db"
 
 def create_app():
-    app = Flask(__name__) # Initialize Flask
-    app.config['SECRET_KEY'] = 'T1S1SH20SEC6ET'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}' # same folder level where the current file is in
+    app = Flask(__name__)  # Initialize Flask
+    app.config['SECRET_KEY'] = SECRET_KEY  # modified here ...
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
-    # import the blueprints
-    from .views import views 
+    from .views import views
     from .auth import auth
 
     app.register_blueprint(views, url_prefix='/')

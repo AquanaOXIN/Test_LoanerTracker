@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!--
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
-    -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -31,7 +28,6 @@
   </head>
   <body>
     <!--Nav Bar-->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom"> -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <button
         class="navbar-toggler"
@@ -63,9 +59,9 @@
       </div>
     </nav>
     <!-- Display flashed messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %} 
-    {% if messages %} 
-    {% for category, message in messages %} 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
     {% if category == 'error' %}
     <div class="alert alert-danger alter-dismissable fade show" role="alert">
       {{ message }}
@@ -80,9 +76,9 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    {% endif %} 
-    {% endfor %} 
-    {% endif %} 
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 
     <!--Color Mode Toggle-->
@@ -97,7 +93,7 @@
         </i>
       </div>
     </form>
-    
+
     <div class="container">
     {% block content %}
     {% endblock %}
@@ -127,22 +123,5 @@
     })
     </script>
 
-    {# <script type="text/javascript">
-      const colorModeBtn = document.getElementById("colorModeBtn")
-      const colorModeIcon = document.getElementById("colorModeIcon")
-      var color_mode = "isDark"
-      colorModeBtn.addEventListener("click", toggleColorMode)
-      function toggleColorMode() {
-        if(colorModeIcon.innerText === "shield_moon")
-        {
-          colorModeIcon.innerText = "wb_incandescent"
-          color_mode = "isDark"
-        } else {
-          colorModeIcon.innerText = "shield_moon"
-          color_mode = "isLight"
-        }
-      }
-    </script> #}
-    
   </body>
 </html>
