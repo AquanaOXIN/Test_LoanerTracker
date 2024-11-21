@@ -28,7 +28,7 @@ def login():
     
     # modified here ...
     dark_mode = session.get('dark_mode', True)
-    return render_template("login.html", user=current_user, dark_mode=views.dark_mode)
+    return render_template("login.html", user=current_user, dark_mode=dark_mode)
 
 @auth.route('/logout')
 @login_required
