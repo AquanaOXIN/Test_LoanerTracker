@@ -1,5 +1,4 @@
 ### Loaner Inventory Project
-(baked on OCui DevOps)
 
 **Test_mode toggle is under views.py**
 
