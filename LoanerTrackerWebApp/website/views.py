@@ -7,7 +7,7 @@ import re
 import json
 import pandas as pd
 
-test_mode = True
+test_mode = False
 
 views = Blueprint('views', __name__) 
 
