@@ -23,7 +23,6 @@ def home():
         if "colorModeIcon" in request.form:
             color_mode = color_toggle()
 
-    # modified here ...
     dark_mode = session.get('dark_mode', True)  
     return render_template("home.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -35,7 +34,6 @@ def records():
             color_mode = color_toggle()
     records = Record.query.all()
 
-    # modified here ...
     dark_mode = session.get('dark_mode', True)
     return render_template("records.html", records=records, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -47,7 +45,6 @@ def devices():
             color_mode = color_toggle()
     devices = Device.query.all()
 
-    # modified here ...
     dark_mode = session.get('dark_mode', True)  
     return render_template("devices.html", devices=devices, test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -81,7 +78,6 @@ def loan_out():
 
             return redirect(url_for('views.loan_out'))
 
-    # modified here ...
     dark_mode = session.get('dark_mode', True)  
     return render_template("loan-out.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -123,7 +119,6 @@ def turn_in():
 
             return redirect(url_for('views.turn_in'))
         
-    # modified here ...
     dark_mode = session.get('dark_mode', True)  
     return render_template("turn-in.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -153,7 +148,6 @@ def add_device():
                 db.session.commit()
                 flash('Device #' + asset_tag + ' has been successfully added into the database!', category='success')
 
-    # modified here ...
     dark_mode = session.get('dark_mode', True)
     return render_template("add-device.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
@@ -167,17 +161,14 @@ def test():
             data = request.form.get('assetTag') 
             print(data)
     
-    # modified here ...
     dark_mode = session.get('dark_mode', True)  
     return render_template("test.html", test_mode=test_mode, user=current_user, dark_mode=dark_mode)
 
 def color_toggle():
     current_color_mode = request.form.get('colorModeIcon')
     if current_color_mode == "isDark":
-        # modified here ...
         session['dark_mode'] = False
     else:
-        # modified here ...
         session['dark_mode'] = True
     return session['dark_mode']
 

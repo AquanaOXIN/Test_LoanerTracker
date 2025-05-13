@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 from . import views
-from .config import SECRET_HASH  
+# from .config import SECRET_HASH  
 
 auth = Blueprint('auth', __name__)
 
@@ -14,17 +14,16 @@ def login():
         if "colorModeIcon" in request.form:
             views.color_toggle()
         else:
+            user = User.query.filter_by(id=0).first()
             secret_code = request.form.get('secretCode')
-            # modified here ...
-            if check_password_hash(SECRET_HASH, secret_code):  
-                user = User.query.filter_by(id=0).first()
+            secret_hash = user.password if user else None
+            if check_password_hash(secret_hash, secret_code):  
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('Invalid Code, iNtRuDeR!!!', category='error')
     
-    # modified here ...
     dark_mode = session.get('dark_mode', True)
     return render_template("login.html", user=current_user, dark_mode=dark_mode)
 
